@@ -1,0 +1,7 @@
+absensi/
+│
+├── index.html   (web absensi kamu)
+├── server.php
+├── login.php
+├── dashboard.php
+├── logout.php
