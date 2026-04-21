@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Power over Ethernet (PoE)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #020617, #0f172a 45%, #1e293b);
+      color: var(--text);
+      padding: 24px;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+    .card {
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid #1f2937;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    }
+    h1, h2 { margin-top: 0; }
+    h1 { font-size: 1.6rem; }
+    .desc { color: var(--muted); line-height: 1.5; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    label { display: block; font-size: 0.9rem; margin-bottom: 6px; color: #cbd5e1; }
+    input, select {
+      width: 100%;
+      border: 1px solid #334155;
+      background: #0b1220;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.95rem;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #082f49;
+      font-weight: 700;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+    .result {
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px;
+      background: #020617;
+    }
+    .result .k { color: var(--muted); font-size: 0.85rem; }
+    .result .v { font-size: 1.3rem; margin-top: 4px; font-weight: 700; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .footnote { font-size: 0.85rem; color: var(--muted); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Kalkulator Power over Ethernet (PoE)</h1>
+      <p class="desc">
+        Kalkulator PoE ini menghitung kebutuhan daya total perangkat, kehilangan daya saluran,
+        penurunan tegangan (voltage drop), resistansi loop kabel, dan estimasi jarak maksimum PoE.
+        Cocok untuk perencanaan kamera IP, access point, VoIP, dan perangkat Ethernet lainnya.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Input Perhitungan</h2>
+      <div class="grid">
+        <div>
+          <label for="powerPd">Daya Perangkat (PD) [W]</label>
+          <input id="powerPd" type="number" min="0.1" step="0.1" value="13" />
+        </div>
+        <div>
+          <label for="voltageSource">Tegangan Sumber PSE [V]</label>
+          <input id="voltageSource" type="number" min="1" step="0.1" value="48" />
+        </div>
+        <div>
+          <label for="voltageMin">Tegangan Minimum di PD [V]</label>
+          <input id="voltageMin" type="number" min="1" step="0.1" value="37" />
+        </div>
+        <div>
+          <label for="length">Panjang Kabel Satu Arah [m]</label>
+          <input id="length" type="number" min="1" step="1" value="100" />
+        </div>
+        <div>
+          <label for="awg">Ukuran Kabel</label>
+          <select id="awg">
+            <option value="0.084">24 AWG (~8.4 Ω / 100m)</option>
+            <option value="0.0667">23 AWG (~6.67 Ω / 100m)</option>
+            <option value="0.053">22 AWG (~5.3 Ω / 100m)</option>
+            <option value="0.0333">20 AWG (~3.33 Ω / 100m)</option>
+          </select>
+        </div>
+        <div>
+          <label for="pairs">Konfigurasi Pair PoE</label>
+          <select id="pairs">
+            <option value="2">2-pair (802.3af/at)</option>
+            <option value="4">4-pair (802.3bt)</option>
+          </select>
+        </div>
+      </div>
+      <button id="calcBtn">Hitung Kalkulator PoE</button>
+    </section>
+
+    <section class="card">
+      <h2>Hasil</h2>
+      <div class="results" id="results"></div>
+      <p class="footnote" id="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>Penguji PoE & Video YouTube</h2>
+      <p class="desc">
+        Gunakan hasil perhitungan ini sebagai acuan awal. Untuk verifikasi lapangan,
+        tetap disarankan memakai <strong>penguji PoE</strong> (PoE tester) dan membandingkan
+        hasil dengan pengukuran real di instalasi.
+      </p>
+      <p class="desc">
+        Jika Anda ingin, saya juga bisa bantu membuat versi dengan <strong>embed video YouTube</strong>
+        (misalnya tutorial instalasi PoE, cara ukur voltage drop, atau cara memilih switch PoE).
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function fmt(n, d = 2) {
+      return Number.isFinite(n) ? n.toFixed(d) : '-';
+    }
+
+    function solveCurrent(powerPd, voltageSource, loopResistance) {
+      if (loopResistance <= 0) {
+        return powerPd / voltageSource;
+      }
+      const discriminant = voltageSource * voltageSource - 4 * loopResistance * powerPd;
+      if (discriminant < 0) {
+        return NaN;
+      }
+      return (voltageSource - Math.sqrt(discriminant)) / (2 * loopResistance);
+    }
+
+    function calculate() {
+      const powerPd = parseFloat($("powerPd").value);
+      const voltageSource = parseFloat($("voltageSource").value);
+      const voltageMin = parseFloat($("voltageMin").value);
+      const length = parseFloat($("length").value);
+      const rPerMeter = parseFloat($("awg").value);
+      const pairs = parseInt($("pairs").value, 10);
+
+      const parallelFactor = pairs / 2;
+      const loopResistance = (2 * length * rPerMeter) / parallelFactor;
+
+      const current = solveCurrent(powerPd, voltageSource, loopResistance);
+      const voltageDrop = current * loopResistance;
+      const voltageAtPd = voltageSource - voltageDrop;
+      const powerLossCable = current * current * loopResistance;
+      const powerFromSource = powerPd + powerLossCable;
+
+      const currentAtVmin = powerPd / voltageMin;
+      const maxLoopResistance = (voltageSource - voltageMin) / currentAtVmin;
+      const maxDistance = (maxLoopResistance * parallelFactor) / (2 * rPerMeter);
+
+      const status = Number.isFinite(current) && voltageAtPd >= voltageMin
+        ? `<span class="ok">Tegangan PD masih aman (≥ ${fmt(voltageMin, 1)} V).</span>`
+        : `<span class="warn">Peringatan: Tegangan PD di bawah batas minimum ${fmt(voltageMin, 1)} V.</span>`;
+
+      $("results").innerHTML = `
+        <div class="result"><div class="k">Resistansi Loop Kabel</div><div class="v">${fmt(loopResistance, 3)} Ω</div></div>
+        <div class="result"><div class="k">Arus PoE</div><div class="v">${fmt(current, 3)} A</div></div>
+        <div class="result"><div class="k">Penurunan Tegangan (Drop)</div><div class="v">${fmt(voltageDrop, 2)} V</div></div>
+        <div class="result"><div class="k">Tegangan di Perangkat (PD)</div><div class="v">${fmt(voltageAtPd, 2)} V</div></div>
+        <div class="result"><div class="k">Kehilangan Daya Kabel</div><div class="v">${fmt(powerLossCable, 2)} W</div></div>
+        <div class="result"><div class="k">Daya Total dari Sumber</div><div class="v">${fmt(powerFromSource, 2)} W</div></div>
+        <div class="result"><div class="k">Jarak PoE Maksimum (Estimasi)</div><div class="v">${fmt(maxDistance, 1)} m</div></div>
+      `;
+      $("status").innerHTML = status;
+    }
+
+    $("calcBtn").addEventListener("click", calculate);
+    calculate();
+  </script>
+</body>
+</html>
