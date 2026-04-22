@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manajemen Kamera CCTV</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Data Kamera CCTV</h1>
+        <p>Simpan IP Kamera, username, dan password agar mudah diakses di Mozilla Firefox dan Google Chrome.</p>
+      </header>
+
+      <section class="card">
+        <h2>Tambah Kamera</h2>
+        <form id="cameraForm" autocomplete="off">
+          <div class="grid">
+            <label>
+              Nama Kamera
+              <input type="text" id="cameraName" placeholder="Contoh: Gerbang Utama" required />
+            </label>
+
+            <label>
+              IP Kamera
+              <input type="text" id="cameraIp" placeholder="Contoh: 192.168.1.10" required />
+            </label>
+
+            <label>
+              Username
+              <input type="text" id="cameraUser" placeholder="admin" required />
+            </label>
+
+            <label>
+              Password
+              <input type="password" id="cameraPass" placeholder="••••••" required />
+            </label>
+          </div>
+
+          <button type="submit">Simpan Kamera</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Daftar Kamera</h2>
+        <div id="emptyState" class="empty">Belum ada data kamera.</div>
+        <div class="table-wrap">
+          <table id="cameraTable" hidden>
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>IP Kamera</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="cameraBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

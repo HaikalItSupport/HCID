@@ -1,0 +1,106 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header h1 {
+  margin-bottom: 8px;
+}
+
+header p {
+  margin-top: 0;
+  color: #475569;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+}
+
+input {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+button {
+  margin-top: 14px;
+  background: #1d4ed8;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.empty {
+  padding: 8px 0 14px;
+  color: #64748b;
+}
+
+.action-btn {
+  background: #dc2626;
+  margin-top: 0;
+}
+
+.action-btn:hover {
+  background: #991b1b;
+}
+
+.mono {
+  font-family: "Courier New", Courier, monospace;
+}
