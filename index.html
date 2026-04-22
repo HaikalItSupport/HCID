@@ -3,28 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manajemen Kamera CCTV</title>
+    <title>Sistem Pusat Komando TMC</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="container">
       <header>
-        <h1>Data Kamera CCTV</h1>
-        <p>Simpan IP Kamera, username, dan password agar mudah diakses di Mozilla Firefox dan Google Chrome.</p>
+        <h1>Daftar IP Address Sistem Pusat Komando TMC</h1>
+        <p>Aplikasi ini bisa diakses dari Mozilla Firefox dan Google Chrome untuk melihat data IP kamera, username, password, dan status.</p>
       </header>
 
       <section class="card">
-        <h2>Tambah Kamera</h2>
+        <h2>Tambah Data Kamera</h2>
         <form id="cameraForm" autocomplete="off">
           <div class="grid">
             <label>
-              Nama Kamera
-              <input type="text" id="cameraName" placeholder="Contoh: Gerbang Utama" required />
+              Lokasi
+              <input type="text" id="cameraLocation" placeholder="Contoh: Surabaya" required />
             </label>
 
             <label>
-              IP Kamera
-              <input type="text" id="cameraIp" placeholder="Contoh: 192.168.1.10" required />
+              Video
+              <input type="text" id="cameraVideo" value="TMC" required />
+            </label>
+
+            <label>
+              Recorder (IP)
+              <input type="text" id="cameraRecorder" placeholder="Contoh: 10.101.2.1" required />
             </label>
 
             <label>
@@ -34,11 +39,20 @@
 
             <label>
               Password
-              <input type="password" id="cameraPass" placeholder="••••••" required />
+              <input type="text" id="cameraPass" placeholder="contoh123" required />
+            </label>
+
+            <label>
+              Status
+              <select id="cameraStatus" required>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
             </label>
           </div>
 
-          <button type="submit">Simpan Kamera</button>
+          <button type="submit">Simpan Data</button>
         </form>
       </section>
 
@@ -49,10 +63,13 @@
           <table id="cameraTable" hidden>
             <thead>
               <tr>
-                <th>Nama</th>
-                <th>IP Kamera</th>
+                <th>No</th>
+                <th>Lokasi</th>
+                <th>Video</th>
+                <th>Recorder</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Status</th>
                 <th>Aksi</th>
               </tr>
             </thead>

@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 920px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
 }
@@ -49,11 +49,13 @@ label {
   font-weight: 600;
 }
 
-input {
+input,
+select {
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 14px;
   padding: 10px 12px;
+  background: #fff;
 }
 
 button {
@@ -78,6 +80,7 @@ button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 920px;
 }
 
 th,
@@ -85,6 +88,11 @@ td {
   text-align: left;
   padding: 10px 8px;
   border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+th {
+  background: #f8fafc;
 }
 
 .empty {
@@ -103,4 +111,22 @@ td {
 
 .mono {
   font-family: "Courier New", Courier, monospace;
+}
+
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-online {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-offline {
+  background: #fee2e2;
+  color: #991b1b;
 }
