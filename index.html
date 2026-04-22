@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Pusat Komando TMC</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Daftar IP Address Sistem Pusat Komando TMC</h1>
+        <p>Aplikasi ini bisa diakses dari Mozilla Firefox dan Google Chrome untuk melihat data IP kamera, username, password, dan status.</p>
+      </header>
+
+      <section class="card">
+        <h2>Tambah Data Kamera</h2>
+        <form id="cameraForm" autocomplete="off">
+          <div class="grid">
+            <label>
+              Lokasi
+              <input type="text" id="cameraLocation" placeholder="Contoh: Surabaya" required />
+            </label>
+
+            <label>
+              Video
+              <input type="text" id="cameraVideo" value="TMC" required />
+            </label>
+
+            <label>
+              Recorder (IP)
+              <input type="text" id="cameraRecorder" placeholder="Contoh: 10.101.2.1" required />
+            </label>
+
+            <label>
+              Username
+              <input type="text" id="cameraUser" placeholder="admin" required />
+            </label>
+
+            <label>
+              Password
+              <input type="text" id="cameraPass" placeholder="contoh123" required />
+            </label>
+
+            <label>
+              Status
+              <select id="cameraStatus" required>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                <option value="Maintenance">Maintenance</option>
+              </select>
+            </label>
+          </div>
+
+          <button type="submit">Simpan Data</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Daftar Kamera</h2>
+        <div id="emptyState" class="empty">Belum ada data kamera.</div>
+        <div class="table-wrap">
+          <table id="cameraTable" hidden>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Lokasi</th>
+                <th>Video</th>
+                <th>Recorder</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="cameraBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
