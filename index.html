@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ATMS | Asset Traffic Monitoring System</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand"><span class="brand-mark">A</span><div><strong>ATMS</strong><small>Asset Traffic Monitoring System</small></div></div>
+        <div class="top-actions">
+          <button id="themeToggle" class="ghost" type="button">🌙 Mode Gelap</button>
+          <button id="exportCsv" type="button">⬇️ Export CSV</button>
+        </div>
+      </nav>
+      <section class="hero-grid">
+        <div>
+          <p class="eyebrow">Monitoring 153 Site • CCTV • ETLE • VDS • Cabinet</p>
+          <h1>Dashboard inventaris ATMS untuk koordinat, IP perangkat, status site, dan akses teknis.</h1>
+          <p class="hero-copy">Kelola daftar site lintas Jawa Tengah, Jawa Timur, dan Bali dengan pencarian cepat, filter status, ringkasan operasional, tautan Google Maps, serta penyimpanan lokal browser.</p>
+          <div class="hero-actions">
+            <a class="primary" href="#siteTable">Lihat Data Site</a>
+            <button id="openForm" type="button">+ Tambah Site</button>
+          </div>
+        </div>
+        <div class="status-card">
+          <span class="pulse"></span>
+          <h2 id="healthScore">0%</h2>
+          <p>Site selesai / completed</p>
+          <div class="mini-bars" id="statusBars"></div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="stats" id="stats"></section>
+
+      <section class="panel controls-panel">
+        <div class="section-title"><span>🔎</span><div><h2>Filter & Pencarian</h2><p>Temukan site berdasarkan ID, lokasi, kota, IP, status, tipe kamera, atau provider data koordinat.</p></div></div>
+        <div class="controls">
+          <label>Pencarian<input id="searchInput" type="search" placeholder="Contoh: Sidoarjo, 10.102.8, PTZ..." /></label>
+          <label>Wilayah<select id="regionFilter"><option value="all">Semua wilayah</option></select></label>
+          <label>Tipe<select id="typeFilter"><option value="all">Semua tipe</option></select></label>
+          <label>Status<select id="statusFilter"><option value="all">Semua status</option></select></label>
+          <label>Provider<select id="providerFilter"><option value="all">Semua provider</option></select></label>
+        </div>
+      </section>
+
+      <section class="grid-two">
+        <article class="panel">
+          <div class="section-title"><span>📍</span><div><h2>Peta Koordinat</h2><p>Pilih site dari tabel untuk melihat detail lokasi dan membuka Google Maps.</p></div></div>
+          <div id="mapPreview" class="map-preview"></div>
+        </article>
+        <article class="panel">
+          <div class="section-title"><span>📊</span><div><h2>Ringkasan Status</h2><p>Komposisi status dan tipe perangkat dari data yang sedang difilter.</p></div></div>
+          <div id="charts" class="charts"></div>
+        </article>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="table-head">
+          <div class="section-title"><span>🗂️</span><div><h2>Daftar Site ATMS</h2><p id="resultInfo">Memuat data...</p></div></div>
+          <div class="table-actions">
+            <button id="resetData" class="ghost danger" type="button">Reset Data</button>
+            <label class="import-btn">⬆️ Import CSV<input id="importCsv" type="file" accept=".csv,text/csv" hidden /></label>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="siteTable">
+            <thead><tr><th>Site</th><th>Wilayah</th><th>Lokasi</th><th>Tipe</th><th>Koordinat</th><th>IP Utama</th><th>Status</th><th>Provider</th><th>Aksi</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="siteDialog">
+      <form id="siteForm" method="dialog">
+        <div class="dialog-head"><h2 id="formTitle">Tambah Site</h2><button type="button" id="closeForm" class="icon-btn">✕</button></div>
+        <div class="form-grid">
+          <input name="id" placeholder="Site ID" required />
+          <input name="region" placeholder="Wilayah/TMC" required />
+          <input name="location" placeholder="Lokasi" required />
+          <input name="coordinate" placeholder="Koordinat lat,lng" required />
+          <input name="address" placeholder="Alamat" />
+          <select name="type"><option>PTZ</option><option>VDS</option><option>ETLE</option><option>FIX</option><option>STATIS (VDS)</option></select>
+          <input name="routerIp" placeholder="Router ISP" />
+          <input name="cameraIp" placeholder="IP Kamera Utama" />
+          <input name="cabinetIp" placeholder="IP Smart Cabinet" />
+          <input name="powerIp" placeholder="IP Power Monitoring" />
+          <input name="username" placeholder="Username" />
+          <input name="password" placeholder="Password / token (opsional)" type="password" autocomplete="new-password" />
+          <input name="meterId" placeholder="ID Meteran Listrik" />
+          <select name="provider"><option>fibernet</option><option>posco</option><option>lainnya</option></select>
+          <select name="status"><option>Completed</option><option>Problem</option><option>Not Found</option><option>Planned</option></select>
+        </div>
+        <menu><button type="button" id="deleteSite" class="danger">Hapus</button><span></span><button type="button" id="cancelForm" class="ghost">Batal</button><button class="primary" value="default">Simpan</button></menu>
+      </form>
+    </dialog>
+
+    <footer><p>ATMS menyimpan perubahan di LocalStorage browser. Untuk produksi, pindahkan kredensial ke secret vault/server terenkripsi.</p></footer>
+    <script src="data/sites.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
